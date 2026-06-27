@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  font-family: "Almarai", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #000;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #000;
+}
+
+.opening-mask,
+.hero-video,
+.hero-title-mask,
+.hero-kicker,
+.hero-copy,
+.hero-counter,
+.section-title-reveal,
+.stagger-card,
+.image-reveal,
+.parallax-image {
+  will-change: transform, opacity, clip-path;
+}
+
+.hero-title-mask,
+.section-title-reveal,
+.image-reveal {
+  overflow: hidden;
+}
+
+.image-reveal {
+  transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-mask {
+    display: none;
+  }
+
+  .hero-video,
+  .hero-title-mask,
+  .hero-kicker,
+  .hero-copy,
+  .hero-counter,
+  .section-title-reveal,
+  .stagger-card,
+  .image-reveal,
+  .parallax-image {
+    transform: none !important;
+    opacity: 1 !important;
+    clip-path: none !important;
+  }
+}
+
+.noise-overlay,
+.noise-overlay::before,
+.bg-noise::before {
+  pointer-events: none;
+}
+
+.noise-overlay::before,
+.bg-noise::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: 0.28;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.55'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.bg-noise::before {
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 260 260' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+.liquid-field {
+  contain: paint;
+  isolation: isolate;
+}
+
+.liquid-field__mesh {
+  background:
+    radial-gradient(ellipse at 16% 12%, rgba(222, 219, 200, 0.28), transparent 34%),
+    radial-gradient(ellipse at 72% 8%, rgba(168, 94, 59, 0.42), transparent 36%),
+    radial-gradient(ellipse at 82% 62%, rgba(122, 128, 98, 0.34), transparent 38%),
+    linear-gradient(135deg, #090807 0%, #15110d 42%, #050505 100%);
+  transform: scale(1.08);
+  animation: liquid-drift 18s ease-in-out infinite alternate;
+}
+
+.liquid-field__mesh::before,
+.liquid-field__mesh::after {
+  position: absolute;
+  inset: -12%;
+  content: "";
+  mix-blend-mode: screen;
+  filter: blur(42px);
+}
+
+.liquid-field__mesh::before {
+  background:
+    linear-gradient(115deg, transparent 0 22%, rgba(222, 219, 200, 0.18) 30%, transparent 43%),
+    linear-gradient(68deg, transparent 0 46%, rgba(168, 94, 59, 0.32) 55%, transparent 70%);
+  animation: liquid-sweep 22s ease-in-out infinite;
+}
+
+.liquid-field__mesh::after {
+  background:
+    radial-gradient(ellipse at 28% 62%, rgba(168, 94, 59, 0.24), transparent 42%),
+    radial-gradient(ellipse at 64% 46%, rgba(222, 219, 200, 0.14), transparent 46%);
+  animation: liquid-swell 26s ease-in-out infinite alternate;
+}
+
+.liquid-field__grain {
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 260 260' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.65'/%3E%3C/svg%3E");
+}
+
+@keyframes liquid-drift {
+  from {
+    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
+  }
+
+  to {
+    transform: scale(1.12) translate3d(1.5%, 1.2%, 0);
+  }
+}
+
+@keyframes liquid-sweep {
+  0% {
+    transform: translate3d(-6%, -2%, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(5%, 4%, 0) rotate(8deg);
+  }
+
+  100% {
+    transform: translate3d(-2%, 7%, 0) rotate(-5deg);
+  }
+}
+
+@keyframes liquid-swell {
+  from {
+    transform: scale(0.96) translate3d(3%, -2%, 0);
+  }
+
+  to {
+    transform: scale(1.08) translate3d(-3%, 3%, 0);
+  }
+}
